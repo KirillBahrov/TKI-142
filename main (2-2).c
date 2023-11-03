@@ -19,11 +19,10 @@ float functionY(const float x, const int a, const float e);
 
 int main()
 {
-    int a = 2;
-    float e = 2.71828; 
+    float a = 2, e = 2.71828;
     printf("Enter the X value ");
     float x = getNumber();
-    printf("%f", functionY(x, a, e) );
+    printf("y = %f", functionY(x, a, e) );
     
     
 }
@@ -45,12 +44,12 @@ float functionY(const float x, const int a, const float e)
     {
         return ( a * (pow(x, 2 * (log(x) ) ) ) );
     }
-    if (x < 1)
+    else if (x < 1)
     {
         return 1;
     }
-    if (x > 2)
+    else if (x > 2)
     {
-        return ((pow(e, a*x) ) * cos(x) );
+        return (( exp (a * x) * cos(x) );
     }
 }
