@@ -34,6 +34,7 @@ int main()
     float r = getNumber();
     float s = getNumber();
     printf("%c", brickPassage(x,y,z,r,s));
+    return 0;
 }
 
 float getNumber()
