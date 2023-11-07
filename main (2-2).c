@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <float.h>
+
 
 /**
  * @brief считывает и проверяет ввод переменной типа float
@@ -10,21 +12,17 @@ float getNumber();
 
 /**
  * @brief решает функцию
- * @param a заданная константа
- * @param е заданная константа
  * @param x значение, которое вводит пользователь для расчета функции
  * @return выводит значение посчитанной функции
 */
-float functionY(const float x, const int a, const float e);
+float functionY(const float x);
 
 int main()
 {
-    float a = 2, e = 2.71828;
     printf("Enter the X value ");
     float x = getNumber();
-    printf("y = %f", functionY(x, a, e) );
-    
-    
+    printf("y = %f", functionY(x) );
+    return 0;
 }
 
 float getNumber()
@@ -38,18 +36,19 @@ float getNumber()
     return x;
 }
 
-float functionY(const float x, const int a, const float e)
+float functionY(const float x)
 {
-    if ( 1 <= x <= 2)
+    float a = 2, e = 2.71828;
+    if ( 1 <= x + DBL_EPSILON <= 2)
     {
         return ( a * (pow(x, 2 * (log(x) ) ) ) );
     }
-    else if (x < 1)
+    else if (x + DBL_EPSILON < 1)
     {
         return 1;
     }
-    else if (x > 2)
+    else if (x + DBL_EPSILON > 2)
     {
-        return (( exp (a * x) * cos(x) );
+        return (( exp (a * x) * cos(x) ));
     }
 }
