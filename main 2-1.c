@@ -64,8 +64,8 @@ float formulaSelection(int x, float a, float b){
             float p = (a + b + c)/2;
             float s = ( pow( p * (p-a) * (p-b) * (p-c), 0.5 ) );
             printf("The area of the triangle is equal to: %f\n", s);
-    else{
-        printf("Wrong value!");
+        else{
+            printf("Wrong value!");
         }
 
 }
