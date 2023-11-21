@@ -20,9 +20,10 @@ double checkingInterval(double beginningX, double finishX);
 
 /**
 @brief проверка значение на положительное число
+@param stepValue - значение переменной stepValue
 @return возвращает значение переменной
 */
-double isPositive();
+void isPositive(double stepValue);
 
 /**
 @brief проверяет существует ли в функция в заданной точке
@@ -50,9 +51,10 @@ int main()
     double finishX = getNumber();
     checkingInterval(beginningX, finishX);
     printf("Enter the step value: ");
-    double stepValue = isPositive();
+    double stepValue =  getNumber();
+    isPositive(stepValue);
     double x = beginningX;
-    while(fabs(DBL_EPSILON) >= x - finishX)
+    while(fabs(x - finishX) > DBL_EPSILON)
     {
         if (existFunction(x))
         {
@@ -82,7 +84,7 @@ double getNumber()
 
 double checkingInterval(double beginningX, double finishX)
 {
- if(beginningX > finishX)
+ if(beginningX - finishX > - DBL_EPSILON)
  {
     printf("Does not satisfy the interval condition!");
     abort;
@@ -90,15 +92,12 @@ double checkingInterval(double beginningX, double finishX)
  return 1;
 }
 
-double isPositive()
+void isPositive(double stepValue)
 {
-    double number;
-    if (scanf("%lf", &number) != 1 || number <0)
-    {
-     printf("Wrong value"); 
-     abort();
-    }
-    return number;
+        if(stepValue <= 0){
+            puts("Wrong value");
+            abort;
+        }
 }
 
 bool existFunction(double x)
