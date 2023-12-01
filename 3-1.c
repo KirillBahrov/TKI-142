@@ -11,6 +11,21 @@
 double getNumber();
 
 /**
+@brief проверяет условие, чтобы начальное значение интервала было меньше конечного
+@param beginningX - значение начала интервала
+@param finishX - значение rjywf интервала
+@return возвращает 1 если условие выполнено
+*/
+double checkingInterval(double beginningX, double finishX);
+
+/**
+@brief проверка значение на положительное число
+@param stepValue - значение переменной stepValue
+@return возвращает значение переменной
+*/
+void isPositive(double stepValue);
+
+/**
 @brief проверяет существует ли в функция в заданной точке
 @param x - значение переменной x
 @return возвращает true если функция существует
@@ -19,9 +34,10 @@ bool existFunction(double x);
 
 /**
 @brief рассчитывает значение функции
+@param x - значение переменной x
 @return возвращает посчитанное значение
 */
-double getFunction();
+double getFunction(double x);
 
 /**
 @brief точка входа в программу
@@ -33,14 +49,16 @@ int main()
     double beginningX = getNumber();
     printf("Enter the end of the interval: ");
     double finishX = getNumber();
+    checkingInterval(beginningX, finishX);
     printf("Enter the step value: ");
-    double stepValue = getNumber();
+    double stepValue =  getNumber();
+    isPositive(stepValue);
     double x = beginningX;
-    while(fabs(DBL_EPSILON) >= x - finishX)
+    while(fabs(x - finishX) > DBL_EPSILON)
     {
         if (existFunction(x))
         {
-            double y = getFunction();
+            double y = getFunction(x);
             printf(" x = %lf", x);
             printf(" y = %lf\n", y);
         }
@@ -56,7 +74,7 @@ int main()
 double getNumber() 
 { 
  double entered_number; 
- if (scanf("%lf", &entered_number) != 1 || (entered_number < 0)) 
+ if (scanf("%lf", &entered_number) != 1 ) 
  { 
   printf("Wrong value"); 
   abort(); 
@@ -64,9 +82,27 @@ double getNumber()
  return entered_number; 
 } 
 
+double checkingInterval(double beginningX, double finishX)
+{
+ if(beginningX - finishX > - DBL_EPSILON)
+ {
+    printf("Does not satisfy the interval condition!");
+    abort;
+ }
+ return 1;
+}
+
+void isPositive(double stepValue)
+{
+        if(stepValue <= 0){
+            puts("Wrong value");
+            abort;
+        }
+}
+
 bool existFunction(double x)
 {
-    return x > DBL_EPSILON;
+    return x > - DBL_EPSILON;
 }
 
 double getFunction(double x)
