@@ -8,6 +8,10 @@
 */
 int sumEvenNumbers();
 
+/**
+@brief точка входа в программу
+@return возвращает 0, если программа выполнена верно
+*/
 int main(){
 sumEvenNumbers();
 
