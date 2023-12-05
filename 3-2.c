@@ -98,8 +98,8 @@ double getEpsilonSum(double epsilon)
     int k = 0;
     while (fabs(current) < epsilon + DBL_EPSILON)
     {
-        current *= getRecurrent(k);
         sum += current;
+        current *= getRecurrent(k);
         k++;
     }
     return sum;
