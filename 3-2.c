@@ -97,25 +97,16 @@ double getCountSum(int count)
     return sum;
 }
 
-int getFactorial(int count)
-{
-     int result = 1, i;
-    for (i = 2; i <= count; i++)
-    {
-        result *= i;
-    }
-    return result;   
-}
-
 double getEpsilonSum(double epsilon)
 {
     double current = 1.0;
     double sum = 0;
     int k = 0;
-    while(current < epsilon)
+    while (fabs(current) < epsilon + DBL_EPSILON)
     {
         current *= getRecurrent(k);
         sum += current;
+        k++
     }
     return sum;
 }
