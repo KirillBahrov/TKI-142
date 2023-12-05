@@ -57,7 +57,7 @@ int getCount()
 {
     int count;
     int result = scanf("%d", &count);
-    if(result != 1 || result != 0)
+    if(result != 1 || count <= 0)
     {
         errno = EIO;
         perror("Wrong value");
