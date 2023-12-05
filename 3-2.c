@@ -106,7 +106,7 @@ double getEpsilonSum(double epsilon)
     {
         current *= getRecurrent(k);
         sum += current;
-        k++
+        k++;
     }
     return sum;
 }
