@@ -122,7 +122,5 @@ double getEpsilonSum(double epsilon)
 
 double getRecurrent(int k)
 {
-    double l = getFactorial(k);
-    double m = getFactorial(k + 1);
-    return((pow(-1, k)) / (l * m)); 
+    return((-1)/((k+2)*(k+1))); 
 }
