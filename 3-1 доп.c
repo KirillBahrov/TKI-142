@@ -12,12 +12,14 @@ int sumEvenNumbers();
 @brief точка входа в программу
 @return возвращает 0, если программа выполнена верно
 */
-int main(){
+int main()
+{
 sumEvenNumbers();
-
+return 0;
 }
 
-int sumEvenNumbers(){
+int sumEvenNumbers()
+{
     int t, i;
     for(i = 0; i <= 100; i++){
         if(i % 2 == 0){
