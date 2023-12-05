@@ -89,7 +89,7 @@ double getCountSum(int count)
 {
     double current = 1.0;
     double sum = current;
-    for(int k = 0; k < count; k++)
+    for(int k = 0; k < count - 1; k++)
     {
         current *= getRecurrent(k);
         sum += current;
