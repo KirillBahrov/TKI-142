@@ -4,22 +4,22 @@
 @brief считает максимальное число из N введенных чисел
 @return возвращает максимальное число из N введенных
 */
-double maxNumber();
+double maxNumber(int N);
 /**
 @brief точка входа в программу
 @return возвращает 0, если программа выполнена верно
 */
 int main()
 {
-    maxNumber();
-    return 0;
-}
-double maxNumber()
-{
-    double x, max;
     int N;
     printf("Enter N: ");
     scanf("%d", &N);
+    maxNumber(N);
+    return 0;
+}
+double maxNumber(int N)
+{
+    double x, max;
     for (int i = 0; i < N; i++)
     {
         printf("Enter value: ");
