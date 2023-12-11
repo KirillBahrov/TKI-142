@@ -82,14 +82,13 @@ double getNumber()
  return entered_number; 
 } 
 
-double checkingInterval(double beginningX, double finishX)
+void checkingInterval(double beginningX, double finishX)
 {
  if(beginningX - finishX > - DBL_EPSILON)
  {
     printf("Does not satisfy the interval condition!");
     abort;
  }
- return 1;
 }
 
 void isPositive(double stepValue)
