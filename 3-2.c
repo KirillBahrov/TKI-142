@@ -70,7 +70,7 @@ double getEpsilon()
 {
     double epsilon;
     int result = scanf("%lf", &epsilon);
-    if(result !=1 || epsilon >= - DBL_EPSILON)
+    if((result !=1 || epsilon >= - DBL_EPSILON) && (epsilon - 1 <= DBL_EPSILON))
     {
         errno = EIO;
         perror("Wrong value");
