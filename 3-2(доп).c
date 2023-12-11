@@ -20,11 +20,15 @@ int main()
 double maxNumber(int N)
 {
     double x, max;
-    for (int i = 0; i < N; i++)
+    max = scanf("%lf", &x);
+    for (int i = 1; i < N; i++)
     {
         printf("Enter value: ");
         scanf("%lf", &x);
-        if (i == 0 || x > max) max = x;
+        if (x > max) 
+        {
+            max = x;
+        }
     }
     printf("Max element: %lf\n", max);
 }
