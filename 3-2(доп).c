@@ -1,5 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 
+/**
+ * @brief считывает и проверяет ввод переменной типа double
+ * @return возвращает считанное значение
+*/
+double getNumber();
 /**
 @brief считает максимальное число из N введенных чисел
 @return возвращает максимальное число из N введенных
@@ -13,18 +19,29 @@ int main()
 {
     int N;
     printf("Enter N: ");
-    scanf("%d", &N);
+    getNumber(N);
     maxNumber(N);
     return 0;
+}
+
+double getNumber()
+{
+    double x;
+    if (scanf("%lf", &x) !=1 || x <= 0)
+    {
+        puts("Wrong value");
+        abort();
+    }
+    return x;
 }
 double maxNumber(int N)
 {
     double x, max;
-    max = scanf("%lf", &x);
     for (int i = 1; i < N; i++)
     {
         printf("Enter value: ");
-        scanf("%lf", &x);
+        getNumber(x);
+        max = x;
         if (x > max) 
         {
             max = x;
