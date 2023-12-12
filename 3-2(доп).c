@@ -36,12 +36,12 @@ double getNumber()
 }
 double maxNumber(int N)
 {
-    double x, max;
+    double x;
+    max = getNumber();
     for (int i = 1; i < N; i++)
     {
         printf("Enter value: ");
-        getNumber(x);
-        max = x;
+        x = getNumber();
         if (x > max) 
         {
             max = x;
