@@ -84,7 +84,7 @@ double getNumber()
 
 void checkingInterval(double beginningX, double finishX)
 {
- if(beginningX - finishX > - DBL_EPSILON)
+ if(beginningX - finishX < DBL_EPSILON)
  {
     printf("Does not satisfy the interval condition!");
     abort;
