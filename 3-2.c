@@ -24,12 +24,6 @@ double getEpsilon();
 */
 double getCountSum(int count);
 /**
-* @brief рассчитывает факториал числа
-* @param count - кол-во членов последовательности
-* @return возвращает посчитанный факториал
-*/
-int getFactorial(int count);
-/**
 * @brief рассчитывает сумму членов последовательности
 * @param epsilon - точность вычисления суммы последовательности
 * @return возвращает посчитанную сумму последовательности
@@ -63,7 +57,7 @@ int getCount()
 {
     int count;
     int result = scanf("%d", &count);
-    if(result != 1 || result <=1)
+    if(result != 1 || count <= 0)
     {
         errno = EIO;
         perror("Wrong value");
@@ -76,7 +70,7 @@ double getEpsilon()
 {
     double epsilon;
     int result = scanf("%lf", &epsilon);
-    if(result !=1 || epsilon >= DBL_EPSILON)
+    if((result !=1 || epsilon >= - DBL_EPSILON) && (epsilon - 1 <= DBL_EPSILON))
     {
         errno = EIO;
         perror("Wrong value");
@@ -89,22 +83,12 @@ double getCountSum(int count)
 {
     double current = 1.0;
     double sum = current;
-    for(int k = 0; k < count; k++)
+    for(int k = 0; k < count - 1; k++)
     {
         current *= getRecurrent(k);
         sum += current;
     }
     return sum;
-}
-
-int getFactorial(int count)
-{
-     int result = 1, i;
-    for (i = 2; i <= count; i++)
-    {
-        result *= i;
-    }
-    return result;   
 }
 
 double getEpsilonSum(double epsilon)
@@ -112,17 +96,16 @@ double getEpsilonSum(double epsilon)
     double current = 1.0;
     double sum = 0;
     int k = 0;
-    while(current < epsilon)
+    while (fabs(current) < epsilon + DBL_EPSILON)
     {
-        current *= getRecurrent(k);
         sum += current;
+        current *= getRecurrent(k);
+        k++;
     }
     return sum;
 }
 
 double getRecurrent(int k)
 {
-    double l = getFactorial(k);
-    double m = getFactorial(k + 1);
-    return((pow(-1, k)) / (l * m)); 
+    return((-1)/((k+2)*(k+1))); 
 }

@@ -54,7 +54,7 @@ int main()
     double stepValue =  getNumber();
     isPositive(stepValue);
     double x = beginningX;
-    while(fabs(x - finishX) > DBL_EPSILON)
+    while(fabs(x - finishX) > - DBL_EPSILON)
     {
         if (existFunction(x))
         {
@@ -82,19 +82,18 @@ double getNumber()
  return entered_number; 
 } 
 
-double checkingInterval(double beginningX, double finishX)
+void checkingInterval(double beginningX, double finishX)
 {
- if(beginningX - finishX > - DBL_EPSILON)
+ if(beginningX - finishX < DBL_EPSILON)
  {
     printf("Does not satisfy the interval condition!");
     abort;
  }
- return 1;
 }
 
 void isPositive(double stepValue)
 {
-        if(stepValue <= 0){
+        if(stepValue <= DBL_EPSILON){
             puts("Wrong value");
             abort;
         }
