@@ -109,7 +109,7 @@ void free_array(int* array);
 int main()
 {
     puts("insert a length of array\n");
-    size_t length = get_size_t();
+    size_t length = get_size_t(); // size t 
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
     int choice = get_int();
     int* mas = gety(length);
@@ -225,9 +225,9 @@ void show_array(const int* const array, const size_t length)
 int *second_task(int* const array, const size_t length)
 {
     int* new_array = gety(length);
-    for (size_t i = 1; i < length; i++)
+    for (size_t i = 0; i < length; i++)
     {
-        if (is_even(array[i]) == 1)
+        if (is_even(i) == 1)
         {
             new_array[i] = i * i;
         }
@@ -267,6 +267,3 @@ void free_array(int* array)
         free(array);
     }
 }
-
-
-
