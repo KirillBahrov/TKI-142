@@ -47,7 +47,7 @@ printf_s("Enter the step value: \n");
 double xStep = getNumber();
 checkStep(xStep);
 checkInterval(xBegin, xEnd);
-while (xBegin < xEnd + xStep)
+while (xBegin < xEnd + xStep) //
 {
 printf_s("X: %lf Y: %lf Sum(x): %lf\n", xBegin, calculation(xBegin), sumFunction(xBegin));
 xBegin = xBegin + xStep;
@@ -69,7 +69,7 @@ return entered_number;
 
 double checkStep(double xStep)
 {
-if (xStep <= DBL_EPSILON)
+if (xStep <= DBL_EPSILON) //
 {
 errno = EIO;
 perror("Wrong value");
@@ -80,7 +80,7 @@ return 1;
 
 double checkInterval(double xBegin, double xEnd)
 {
-if (xBegin - xEnd > -DBL_EPSILON)
+if (xBegin - xEnd > -DBL_EPSILON) //
 {
 printf("Does not satisfy the interval condition!");
 abort();
@@ -98,9 +98,9 @@ double sumFunction(double x)
 {
 const double e = pow(10, -4); // точность
 double n = 0;  
-double current_x = 1;
-double sum = current_x;
-while (calculation(x) - sum > e - DBL_EPSILON)
+double current_x = 1.0; //
+double sum = x;
+while (calculation(x) - sum > e - DBL_EPSILON) //
 {
 current_x *= (((pow(x, 2)) * (((-2) * n) - 1)) / ((2 * n) + 3));
 sum += current_x;
