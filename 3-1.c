@@ -54,7 +54,7 @@ int main()
     double stepValue =  getNumber();
     isPositive(stepValue);
     double x = beginningX;
-    while(fabs(x - finishX) > - DBL_EPSILON)
+    while(fabs(x) - fabs(finishX) > - DBL_EPSILON)
     {
         if (existFunction(x))
         {
@@ -108,6 +108,3 @@ double getFunction(double x)
 {
     return( (0.29 * ( pow(x, 3))) + x - 1.2502 );
 }
-
-
-
