@@ -200,13 +200,10 @@ int find_abs_max(int* const array, size_t length)
     int index = 0;
     for (size_t i = 0; i < length; i++)
     {
-        if (array[i] < 0)
-        {
             if (abs(array[index]) < abs(array[i]))
             {
                 index = i;
             }
-        }
     }
     return index;
 }
