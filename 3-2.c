@@ -70,7 +70,7 @@ double getEpsilon()
 {
     double epsilon;
     int result = scanf("%lf", &epsilon);
-    if((result !=1 || epsilon >= - DBL_EPSILON) && (epsilon - 1 <= DBL_EPSILON))
+    if((result !=1 || epsilon <=  DBL_EPSILON) && (epsilon - 0.5 >= -DBL_EPSILON))
     {
         errno = EIO;
         perror("Wrong value");
@@ -81,9 +81,9 @@ double getEpsilon()
 
 double getCountSum(int count)
 {
-    double current = 1.0;
-    double sum = current;
-    for(int k = 0; k < count - 1; k++)
+    double current = 1.0; // 
+    double sum = 0; // ***
+    for(int k = 0; k < count + 1; k++)
     {
         current *= getRecurrent(k);
         sum += current;
@@ -93,14 +93,14 @@ double getCountSum(int count)
 
 double getEpsilonSum(double epsilon)
 {
-    double current = 1.0;
+    double current = 1.0; /// 
     double sum = 0;
     int k = 0;
-    while (fabs(current) < epsilon + DBL_EPSILON)
+    while (fabs(current) > epsilon + DBL_EPSILON) /// &&&& 
     {
-        sum += current;
         current *= getRecurrent(k);
         k++;
+        sum += current;
     }
     return sum;
 }
