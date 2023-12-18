@@ -35,7 +35,7 @@ enum Choices
 /**
  * @brief Функция выделяет память под массив
  * @param length длина массива
- * @return array указатель на пустой массив
+ * @return указатель на пустой массив
 */
 int* gety(size_t length);
 
