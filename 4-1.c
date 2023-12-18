@@ -52,7 +52,7 @@ void show_array(const int* const array, const size_t length);
  * @return 0 четный
  * @return 1 нечетный
 */
-int is_even(int number);
+bool is_even(int number);
 
 
 /**
