@@ -37,7 +37,7 @@ enum Choices
  * @param length длина массива
  * @return указатель на пустой массив
 */
-int* gety(size_t length);
+int* get_array(size_t length);
 
 /**
  * @brief Функция, показывающая массив поэлементно
@@ -168,7 +168,7 @@ size_t get_size_t()
     return (size_t)number;
 }
 
-int* gety(size_t length)
+int* get_array(size_t length)
 {
     int* array = (int*)malloc(length * sizeof(int));
     if (NULL == array)
@@ -227,7 +227,7 @@ void show_array(const int* const array, const size_t length)
 
 int *second_task(int* const array, const size_t length)
 {
-    int* new_array = gety(length);
+    int* new_array = get_array(length);
     for (size_t i = 0; i < length; i++)
     {
         if (is_even(i))
