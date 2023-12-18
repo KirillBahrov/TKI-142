@@ -132,7 +132,7 @@ int main()
     show_array(second_task(mas, length), length);
     puts("insert a integer number\n");
     int number = get_int();
-    if (third_task(mas, length, number) == 1)
+    if (third_task(mas, length, number))
     {
         puts("Third task: True\n");
     }
