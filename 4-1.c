@@ -73,7 +73,7 @@ void random_array(int* array, const size_t length);
  * @brief Находит произведение элементов, имеющих четное значение
  * @param array указатель на массив
  * @param length размерность массива
- * @return result результат
+ * @return результат
 */
 int first_task(int* const array, size_t length);
 
