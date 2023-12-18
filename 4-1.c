@@ -253,7 +253,7 @@ bool third_task(int* const array, const size_t length, const int number)
     return false;
 }
 
-int is_even(int number)
+bool is_even(int number)
 {
     if (number % 2 == 0)
     {
