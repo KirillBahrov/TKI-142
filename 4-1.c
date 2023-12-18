@@ -229,7 +229,7 @@ int *second_task(int* const array, const size_t length)
     int* new_array = gety(length);
     for (size_t i = 0; i < length; i++)
     {
-        if (is_even(i) == 1)
+        if (is_even(i))
         {
             new_array[i] = i * i;
         }
