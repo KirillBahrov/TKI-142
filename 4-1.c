@@ -241,7 +241,7 @@ int *second_task(int* const array, const size_t length)
     return new_array;
 }
 
-bool third_task(int* const array, const int length, const int number)
+bool third_task(int* const array, const size_t length, const int number)
 {
     for (int i = 0; i < length; i++)
     {
