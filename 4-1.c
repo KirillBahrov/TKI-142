@@ -93,7 +93,7 @@ int *second_task(int* const array, const size_t length);
  * @return true есть такие элементы
  * @return false нет таких элементов
 */
-bool third_task(int* const array, const int length, const int number);
+bool third_task(int* const array, const size_t length, const int number);
 
 /**
  * @brief Функция, освобождающая массив
