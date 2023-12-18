@@ -108,6 +108,7 @@ void free_array(int* array);
 */
 int main()
 {
+    in q = 15, r = -15;
     puts("insert a length of array\n");
     size_t length = get_size_t(); // size t 
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
@@ -188,11 +189,11 @@ void user_array(int* const array, const size_t length)
     }
 }
 
-void random_array(int* const array, const size_t length)
+void random_array(int* const array, const size_t length, const int q, const int r)
 {
     for (size_t i = 0; i < length; i++)
     {
-        array[i] = rand() % 15 - 15;
+        array[i] = rand() % q + r;
     }
 }
 
