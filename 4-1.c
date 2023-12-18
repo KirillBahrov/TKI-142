@@ -198,6 +198,8 @@ void random_array(int* const array, const size_t length)
 
 void array_null()
 {
+    errno = ENOMEM;
+    perror("Error: ");
     abort();
 }
 
