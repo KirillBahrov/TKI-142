@@ -220,7 +220,7 @@ void show_array(const int* const array, const size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
-        printf("Array[%d]  %d\n", (int)i, array[i]);
+        printf("Array[%su]  %su\n", i, array[i]);
     }
 }
 
