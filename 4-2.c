@@ -119,8 +119,10 @@ int main()
             return 1;
     }
 
-
+    int* new_array = get_mem_array(length);
+    copy_array(*array, *new_array, length);
     show_array(first_task(mas, length), length);
+
     show_array(third_task(mas, length), length);
     free_array(mas);
     return 0;
