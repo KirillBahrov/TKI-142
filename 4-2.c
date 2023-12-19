@@ -122,7 +122,8 @@ int main()
     int* new_array = get_mem_array(length);
     copy_array(*array, *new_array, length);
     show_array(first_task(mas, length), length);
-
+    int* new_array = get_mem_array(length);
+    copy_array(*array, *new_array, length);
     show_array(third_task(mas, length), length);
     free_array(mas);
     return 0;
@@ -221,16 +222,12 @@ int is_even(int number)
 
 int *first_task(int* array, size_t length)
 {
-    int* new_array = get_mem_array(length);
-    copy_array(*array, *new_array, length);
     new_array[-2] = new_array[find_abs_max(*array, length)];
     return new_array;
 }
 
 int* third_task(int* const array, size_t length)
 {
-    int* new_array = get_mem_array(length);
-    copy_array(*array, *new_array, length);
     for (size_t i = 0; i < length; i++)
     {
         if (is_even(array[i]) == 0)
