@@ -255,7 +255,7 @@ bool is_even(int number)
 
 void free_array(int* array)
 {
-    if (NULL != array)
+    if (array = NULL)
     {
         free(array);
     }
