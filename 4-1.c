@@ -113,7 +113,7 @@ int main()
     size_t length = get_size_t(); // size t 
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
     int choice = get_int();
-    int* mas = gety(length);
+    int* mas = get_array(length);
     switch ((enum Choices)choice)
     {
         case random_choice:
