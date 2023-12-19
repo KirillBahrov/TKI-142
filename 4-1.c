@@ -250,11 +250,7 @@ bool third_task(int* const array, const size_t length, const int number)
 
 bool is_even(int number)
 {
-    if (number % 2 == 0)
-    {
-        return 0;
-    }
-    return 1;
+    return (number % 2 == 0;
 }
 
 void free_array(int* array)
