@@ -198,13 +198,6 @@ void random_array(int* const array, const size_t length, const int q, const int 
     }
 }
 
-void array_null()
-{
-    errno = ENOMEM;
-    perror("Error: ");
-    abort();
-}
-
 int first_task(int* const array, size_t length)
 {
     int result = 1;
