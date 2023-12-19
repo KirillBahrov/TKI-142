@@ -108,7 +108,7 @@ void free_array(int* array);
 */
 int main()
 {
-    in q = 15, r = -15;
+    int q = 15, r = -15;
     puts("insert a length of array\n");
     size_t length = get_size_t(); // size t 
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
