@@ -5,11 +5,6 @@
 #include <stdbool.h>
 
 /**
- * @brief Функция досрочно завершает программу под предлогом исчерпания ОЗУ под динамический массив
- */
-void array_null();
-
-/**
  * @brief Функция присваивает целочисленное значение переменной
  * @return целочисленное число
 */
@@ -63,11 +58,13 @@ bool is_even(int number);
 void user_array(int* array, const size_t length);
 
 /**
- * @brief Функция заполняет массив рандомными числами в диапазоне [-100:200]
+ * @brief Функция заполняет массив рандомными числами в диапазоне [min:max]
  * @param array указатель на заполняемый массив
+ * @param min минимальное значение диапазона
+ * @param max максимальное значение
  * @param length длина массива
 */
-void random_array(int* array, const size_t length);
+void random_array(int* array, const size_t length, const int max, const int min);
 
 /**
  * @brief Находит произведение элементов, имеющих четное значение
@@ -112,13 +109,13 @@ int main()
     const int max_range = 15;
     puts("insert a length of array\n");
     size_t length = get_size_t(); // size t 
-    puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
+    printf("if you fill array by youself, press %d, if you fill array by random numbers, press %d\n", (enum Choices)(user_choice), (enum Choices)(random_choice));
     int choice = get_int();
     int* mas = get_array(length);
     switch ((enum Choices)choice)
     {
         case random_choice:
-            random_array(mas, length);
+            random_array(mas, length, min_range, max_range);
             break;
         case user_choice:
             user_array(mas, length);
@@ -130,8 +127,10 @@ int main()
     
     
     printf("First task: %d\n", first_task(mas, length));
+    int* second_array = second_task(mas, length);
     puts("Second task:\n");
-    show_array(second_task(mas, length), length);
+    show_array(second_array, length);
+    free_array(second_array);
     puts("insert a integer number\n");
     int number = get_int();
     if (third_task(mas, length, number))
@@ -174,7 +173,9 @@ int* get_array(size_t length)
     int* array = (int*)malloc(length * sizeof(int));
     if (NULL == array)
     {
-        array_null();
+        errno = ENOMEM;
+        perror("Error: \n");
+        abort();
     }
     return array;
 }
@@ -190,11 +191,11 @@ void user_array(int* const array, const size_t length)
     }
 }
 
-void random_array(int* const array, const size_t length, const int q, const int r)
+void random_array(int* const array, const size_t length, const int max, const int min)
 {
     for (size_t i = 0; i < length; i++)
     {
-        array[i] = rand() % q + r;
+        array[i] = rand() % max + min;
     }
 }
 
@@ -215,7 +216,7 @@ void show_array(const int* const array, const size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
-        printf("Array[%su]  %su\n", i, array[i]);
+        printf("Array[%zu]  %zu\n", i, array[i]); // zu так как компилятор читает только это(компилятор gcc), %d так как элементы в массиве могут быть ОТРИЦАТЕЛЬНЫЕ
     }
 }
 
@@ -250,7 +251,7 @@ bool third_task(int* const array, const size_t length, const int number)
 
 bool is_even(int number)
 {
-    return (number % 2 == 0;
+    return number % 2 == 0;
 }
 
 void free_array(int* array)
