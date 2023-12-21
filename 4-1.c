@@ -96,7 +96,7 @@ bool third_task(int* const array, const size_t length, const int number);
  * @brief Функция, освобождающая массив
  * @param array указатель на массив
 */
-void free_array(int* array);
+void free_array(int** array);
 
 /**
  * @brief Точка входа в программу
@@ -130,7 +130,7 @@ int main()
     int* second_array = second_task(mas, length);
     puts("Second task:\n");
     show_array(second_array, length);
-    free_array(second_array);
+    free_array(&second_array);
     puts("insert a integer number\n");
     int number = get_int();
     if (third_task(mas, length, number))
@@ -258,7 +258,7 @@ void free_array(int** array)
 {
 if (array != NULL)
     {
-        free(array);
+        free(*array);
         array = NULL;
     }
 }
