@@ -216,7 +216,7 @@ void show_array(const int* const array, const size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
-        printf("Array[%zu]  %zu\n", i, array[i]); // zu так как компилятор читает только это(компилятор gcc), %d так как элементы в массиве могут быть ОТРИЦАТЕЛЬНЫЕ
+        printf("Array[%lu]  %u\n", i, array[i]); 
     }
 }
 
