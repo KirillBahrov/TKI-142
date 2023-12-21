@@ -5,13 +5,8 @@
 #include <stdbool.h>
 
 /**
- * @brief Функция досрочно завершает программу под предлогом исчерпания ОЗУ под динамический массив
- */
-void array_null();
-
-/**
  * @brief Функция присваивает целочисленное значение переменной
- * @return целочисленная цифра
+ * @return целочисленное число
 */
 int get_int();
 
@@ -35,9 +30,9 @@ enum Choices
 /**
  * @brief Функция выделяет память под массив
  * @param length длина массива
- * @return array указатель на пустой массив
+ * @return указатель на пустой массив
 */
-int* gety(size_t length);
+int* get_array(size_t length);
 
 /**
  * @brief Функция, показывающая массив поэлементно
@@ -52,7 +47,7 @@ void show_array(const int* const array, const size_t length);
  * @return 0 четный
  * @return 1 нечетный
 */
-int is_even(int number);
+bool is_even(int number);
 
 
 /**
@@ -63,17 +58,19 @@ int is_even(int number);
 void user_array(int* array, const size_t length);
 
 /**
- * @brief Функция заполняет массив рандомными числами в диапазоне [-100:200]
+ * @brief Функция заполняет массив рандомными числами в диапазоне [min:max]
  * @param array указатель на заполняемый массив
+ * @param min минимальное значение диапазона
+ * @param max максимальное значение
  * @param length длина массива
 */
-void random_array(int* array, const size_t length);
+void random_array(int* array, const size_t length, const int max, const int min);
 
 /**
  * @brief Находит произведение элементов, имеющих четное значение
  * @param array указатель на массив
  * @param length размерность массива
- * @return result результат
+ * @return результат
 */
 int first_task(int* const array, size_t length);
 
@@ -93,13 +90,13 @@ int *second_task(int* const array, const size_t length);
  * @return true есть такие элементы
  * @return false нет таких элементов
 */
-bool third_task(int* const array, const int length, const int number);
+bool third_task(int* const array, const size_t length, const int number);
 
 /**
  * @brief Функция, освобождающая массив
  * @param array указатель на массив
 */
-void free_array(int* array);
+void free_array(int** array);
 
 /**
  * @brief Точка входа в программу
@@ -108,15 +105,17 @@ void free_array(int* array);
 */
 int main()
 {
+    const int min_range = -15;
+    const int max_range = 15;
     puts("insert a length of array\n");
-    size_t length = get_size_t();
-    puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
+    size_t length = get_size_t(); // size t 
+    printf("if you fill array by youself, press %d, if you fill array by random numbers, press %d\n", (enum Choices)(user_choice), (enum Choices)(random_choice));
     int choice = get_int();
-    int* mas = gety(length);
+    int* mas = get_array(length);
     switch ((enum Choices)choice)
     {
         case random_choice:
-            random_array(mas, length);
+            random_array(mas, length, min_range, max_range);
             break;
         case user_choice:
             user_array(mas, length);
@@ -128,11 +127,13 @@ int main()
     
     
     printf("First task: %d\n", first_task(mas, length));
+    int* second_array = second_task(mas, length);
     puts("Second task:\n");
-    show_array(second_task(mas, length), length);
+    show_array(second_array, length);
+    free_array(&second_array);
     puts("insert a integer number\n");
     int number = get_int();
-    if (third_task(mas, length, number) == 1)
+    if (third_task(mas, length, number))
     {
         puts("Third task: True\n");
     }
@@ -140,7 +141,7 @@ int main()
     {
         puts("Third task: False\n");
     }
-    free_array(mas);
+    free_array(&mas);
     return 0;
 }
 
@@ -167,12 +168,14 @@ size_t get_size_t()
     return (size_t)number;
 }
 
-int* gety(size_t length)
+int* get_array(size_t length)
 {
     int* array = (int*)malloc(length * sizeof(int));
     if (NULL == array)
     {
-        array_null();
+        errno = ENOMEM;
+        perror("Error: \n");
+        abort();
     }
     return array;
 }
@@ -188,17 +191,12 @@ void user_array(int* const array, const size_t length)
     }
 }
 
-void random_array(int* const array, const size_t length)
+void random_array(int* const array, const size_t length, const int max, const int min)
 {
     for (size_t i = 0; i < length; i++)
     {
-        array[i] = rand() % 15 - 15;
+        array[i] = rand() % max + min;
     }
-}
-
-void array_null()
-{
-    abort();
 }
 
 int first_task(int* const array, size_t length)
@@ -218,16 +216,16 @@ void show_array(const int* const array, const size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
-        printf("Array[%d]  %d\n", (int)i, array[i]);
+        printf("Array[%lu]  %u\n", i, array[i]); 
     }
 }
 
 int *second_task(int* const array, const size_t length)
 {
-    int* new_array = gety(length);
-    for (size_t i = 1; i < length; i++)
+    int* new_array = get_array(length);
+    for (size_t i = 0; i < length; i++)
     {
-        if (is_even(array[i]) == 1)
+        if (is_even(i))
         {
             new_array[i] = i * i;
         }
@@ -239,7 +237,7 @@ int *second_task(int* const array, const size_t length)
     return new_array;
 }
 
-bool third_task(int* const array, const int length, const int number)
+bool third_task(int* const array, const size_t length, const int number)
 {
     for (int i = 0; i < length; i++)
     {
@@ -251,22 +249,16 @@ bool third_task(int* const array, const int length, const int number)
     return false;
 }
 
-int is_even(int number)
+bool is_even(int number)
 {
-    if (number % 2 == 0)
-    {
-        return 0;
-    }
-    return 1;
+    return number % 2 == 0;
 }
 
-void free_array(int* array)
+void free_array(int** array) 
 {
-    if (NULL != array)
+if (array != NULL)
     {
-        free(array);
+        free(*array);
+        array = NULL;
     }
 }
-
-
-
