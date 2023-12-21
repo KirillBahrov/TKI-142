@@ -32,7 +32,15 @@ enum Choices
  * @param length длина массива
  * @return array указатель на пустой массив
 */
-int* get_mem_array(const int length);
+int* get_mem_array(const size_t length);
+
+/**
+ * @brief фукнция считает новую длину под масиив из пункта 2
+ * @param array исходный массив
+ * @param length длина исходного массива
+ * @param k введенное число
+*/
+size_t new_length(int* array, size_t length, int const k);
 
 /**
  * @brief Функция заполняет массив, элементы вводит пользователь
@@ -73,6 +81,15 @@ void copy_array(int* const array_original, int* array_copy, const size_t length)
 int *first_task(int* array, size_t length);
 
 /**
+ * @brief ЗАПОЛНЯЕТ массив по условию пункта 2
+ * @param original_array исходный массив
+ * @param array пустой новый массив с нужной размерностью
+ * @param length длина исходного массива
+ * @param number введенное число
+*/
+void second_task(int* original_array, int* array, size_t length, int number);
+
+/**
  * @brief Функция проверяет на четность целое число
  * @param number число
  * @return 0 четный
@@ -93,6 +110,13 @@ int* third_task(int* const array, size_t length);
  * @param array указатель на массив
 */
 void free_array(int* array);
+
+/*
+
+*/
+int amount_k(int* array, size_t length, size_t k);
+
+int* second_task_1(int* array, size_t length, size_t k, int amount);
 
 /**
  * @brief Точка входа в программу
@@ -119,13 +143,30 @@ int main()
             return 1;
     }
 
-    int* new_array = get_mem_array(length);
-    copy_array(*array, *new_array, length);
-    show_array(first_task(mas, length), length);
-    int* new_array = get_mem_array(length);
-    copy_array(*array, *new_array, length);
-    show_array(third_task(mas, length), length);
+    int* task_1_array = get_mem_array(length);
+    copy_array(mas, task_1_array, length);
+    int* task_1_array_1 = first_task(task_1_array, length);
+    show_array(task_1_array_1, length);
+    free_array(task_1_array);
+    free_array(task_1_array_1);
+
+    puts("Insert a K\n");
+    int k = get_int();
+    if (k < 0 || k > 10)
+    {
+        puts("Insert a valid number!\n");
+        return 1;
+    }
+    int* task_2_1 = second_task_1(mas, length, k, amount_k(mas, length, k));
+    show_array(task_2_1, length + amount_k(mas, length, k));
+    free_array(task_2_1);
+
+    int* task_3_array = get_mem_array(length);
+    copy_array(mas, task_3_array, length);
+    task_3_array = third_task(task_3_array, length);
+    free_array(task_3_array);
     free_array(mas);
+    
     return 0;
 }
 
@@ -152,9 +193,9 @@ size_t get_size_t()
     return (size_t)number;
 }
 
-int* get_mem_array(const int length)
+int* get_mem_array(const size_t length)
 {
-    int* array = malloc(length * sizeof(int));
+    int* array = (int*)malloc(length * sizeof(int));
     if (NULL == array)
     {
         errno = ENOMEM;
@@ -186,7 +227,7 @@ void show_array(const int* const array, const size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
-        printf("Element[%d]  %d\n", i, array[i]);
+        printf("Element[%ld]  %d\n", i, array[i]);
     }
 }
 
@@ -200,15 +241,15 @@ void copy_array(int* const array_original, int* array_copy, const size_t length)
 
 int find_abs_max(int* const array, size_t length)
 {
-    int index = 0;
+    int abs_max = 0;
     for (size_t i = 0; i < length; i++)
     {
-            if (abs(array[index]) < abs(array[i]))
+            if (abs(array[i]) > abs(abs_max))
             {
-                index = i;
+                abs_max = array[i];
             }
     }
-    return index;
+    return abs_max;
 }
 
 int is_even(int number)
@@ -222,30 +263,99 @@ int is_even(int number)
 
 int *first_task(int* array, size_t length)
 {
-    new_array[-2] = new_array[find_abs_max(*array, length)];
-    return new_array;
+    array[-2] = find_abs_max(array, length);
+    return array;
+}
+
+size_t new_length(int* array, size_t length, int const k)
+{
+    size_t new_leng = length;
+    if (array[length-1] % 10 == k)
+    {
+        new_leng++;
+    }
+    
+    else if (array[0] % 10 == k)
+    {
+        new_leng++;
+    }
+    
+    for (size_t i = 0; i < length - 1; i++)
+    {
+        if ((array[i] % 10 == k && array[i+1] % 10 != k) || (array[i] % 10 != k && array[i+1] % 10 == k))
+        {
+            new_leng++;
+        }
+    }
+
+    return new_leng;
+}
+
+int amount_k(int* array, size_t length, size_t k)
+{
+    int amount = 0;
+    for (size_t i = 0; i < length; i++)
+    {
+        if(abs(array[i]) % 10 == k)
+        {
+            ++amount;
+            printf("%d", amount);
+        }
+    }
+    return amount+1;
+}
+
+int* second_task_1(int* array, size_t length, size_t k, int amount)
+{
+    int* mass = get_mem_array(length+amount);
+    size_t i = 0;
+    size_t j = 0;
+    while (j < (length+amount), i < length)
+    {
+        if(abs(array[i]) % 10 == k)
+        {
+            mass[j] = k;
+            mass[j+1] = array[i];
+            mass[j+2] = k;
+            i++;
+            j = j + 3;
+        }
+        else
+        {
+            mass[j] = array[i];
+            i++;
+            j++;
+        }
+    }
+    return mass;
 }
 
 int* third_task(int* const array, size_t length)
 {
+    int* new_array = get_mem_array(length);
+    copy_array(array, new_array, length);
     for (size_t i = 0; i < length; i++)
     {
-        if (is_even(array[i]) == 0)
+        if (is_even(new_array[i]) == 0)
         {
-            new_array[i] = i * (array[i] * array[i]);
+            array[i] = i * (new_array[i] * new_array[i]);
         }
         else
         {
-            new_array[i] = array[i] / (i-1); 
+            array[i] = new_array[i] / (i-1); 
         }
     }
-    return new_array;
+    free_array(new_array);
+    return array;
 }
 
 void free_array(int* array)
 {
-    if (NULL != array)
+    if (array != NULL)
     {
         free(array);
-    }
+        array = NULL;
+    } 
 }
+
+
