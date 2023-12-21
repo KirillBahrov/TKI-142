@@ -141,7 +141,7 @@ int main()
     {
         puts("Third task: False\n");
     }
-    free_array(mas);
+    free_array(&mas);
     return 0;
 }
 
@@ -254,10 +254,11 @@ bool is_even(int number)
     return number % 2 == 0;
 }
 
-void free_array(int* array)
+void free_array(int** array) 
 {
-    if (array = NULL)
+if (array != NULL)
     {
         free(array);
+        array = NULL;
     }
 }
