@@ -109,14 +109,7 @@ int* third_task(int* const array, size_t length);
  * @brief Функция, освобождающая массив
  * @param array указатель на массив
 */
-void free_array(int* array);
-
-/*
-
-*/
-int amount_k(int* array, size_t length, size_t k);
-
-int* second_task_1(int* array, size_t length, size_t k, int amount);
+void free_array(int** array);
 
 /**
  * @brief Точка входа в программу
@@ -145,27 +138,28 @@ int main()
 
     int* task_1_array = get_mem_array(length);
     copy_array(mas, task_1_array, length);
-    int* task_1_array_1 = first_task(task_1_array, length);
-    show_array(task_1_array_1, length);
-    free_array(task_1_array);
-    free_array(task_1_array_1);
+    task_1_array = first_task(task_1_array, length);
+    show_array(task_1_array, length);
+    free_array(&task_1_array);
 
-    puts("Insert a K\n");
-    int k = get_int();
-    if (k < 0 || k > 10)
+
+    puts("Insert a number\n");
+    int number = get_int();
+    if (number < 0 || number > 10)
     {
         puts("Insert a valid number!\n");
         return 1;
     }
-    int* task_2_1 = second_task_1(mas, length, k, amount_k(mas, length, k));
-    show_array(task_2_1, length + amount_k(mas, length, k));
-    free_array(task_2_1);
+    int* task_2_array = get_mem_array(new_length(mas, length, number));
+    second_task(mas, task_2_array, length, number);
+    show_array(task_2_array, new_length(mas, length, number));
+    free_array(&task_2_array);
 
     int* task_3_array = get_mem_array(length);
     copy_array(mas, task_3_array, length);
     task_3_array = third_task(task_3_array, length);
-    free_array(task_3_array);
-    free_array(mas);
+    free_array(&task_3_array);
+    free_array(&mas);
     
     return 0;
 }
@@ -241,15 +235,15 @@ void copy_array(int* const array_original, int* array_copy, const size_t length)
 
 int find_abs_max(int* const array, size_t length)
 {
-    int abs_max = 0;
+    int index = 0;
     for (size_t i = 0; i < length; i++)
     {
-            if (abs(array[i]) > abs(abs_max))
+            if (abs(array[index]) < abs(array[i]))
             {
-                abs_max = array[i];
+                index = i;
             }
     }
-    return abs_max;
+    return index;
 }
 
 int is_even(int number)
@@ -263,7 +257,7 @@ int is_even(int number)
 
 int *first_task(int* array, size_t length)
 {
-    array[-2] = find_abs_max(array, length);
+    array[-2] = array[find_abs_max(array, length)];
     return array;
 }
 
@@ -291,43 +285,38 @@ size_t new_length(int* array, size_t length, int const k)
     return new_leng;
 }
 
-int amount_k(int* array, size_t length, size_t k)
+void second_task(int* original_array, int* array, size_t length, int number)
 {
-    int amount = 0;
-    for (size_t i = 0; i < length; i++)
-    {
-        if(abs(array[i]) % 10 == k)
-        {
-            ++amount;
-            printf("%d", amount);
-        }
-    }
-    return amount+1;
-}
-
-int* second_task_1(int* array, size_t length, size_t k, int amount)
-{
-    int* mass = get_mem_array(length+amount);
+    int* control_array = get_mem_array(length);
+    copy_array(original_array, control_array, length);
+    size_t top = 0;
     size_t i = 0;
-    size_t j = 0;
-    while (j < (length+amount), i < length)
+
+    if (control_array[0] % 10 == number)
     {
-        if(abs(array[i]) % 10 == k)
+        array[0] = number;
+        i++;
+    }
+
+    for (i = 1; i < new_length(original_array, length, number); i++)
+    {
+        if ((array[i] % 10 == number && array[i-1] % 10 != number) || (array[i] % 10 != number && array[i-1] == number))
         {
-            mass[j] = k;
-            mass[j+1] = array[i];
-            mass[j+2] = k;
-            i++;
-            j = j + 3;
+            array[i] = number;
         }
         else
         {
-            mass[j] = array[i];
-            i++;
-            j++;
+            array[i] = original_array[top];
+            top++;
         }
     }
-    return mass;
+
+    if (control_array[length - 1] % 10 == number)
+    {
+        array[new_length(original_array, length, number) - 1] = number;
+    }
+
+    free_array(&control_array);
 }
 
 int* third_task(int* const array, size_t length)
@@ -345,17 +334,15 @@ int* third_task(int* const array, size_t length)
             array[i] = new_array[i] / (i-1); 
         }
     }
-    free_array(new_array);
+    free_array(&new_array);
     return array;
 }
 
-void free_array(int* array)
+void free_array(int** array)
 {
-    if (array != NULL)
-    {
-        free(array);
-        array = NULL;
-    } 
+if (array != NULL)
+{
+free(array);
+array = NULL;
 }
-
-
+}
