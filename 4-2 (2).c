@@ -129,6 +129,9 @@ int main()
         puts("Insert a valid choice!\n");
         return 1;
     }
+    
+    puts("Array\n");
+    show_array(mas, length);
 
     int* task_1_array = get_mem_array(length);
     first_task(mas, task_1_array, length);
@@ -143,6 +146,7 @@ int main()
         puts("Insert a valid number!\n");
         return 1;
     }
+    
     int* task_2_1 = get_mem_array(new_length(mas, length, k));
     second_task(mas, task_2_1, length, k);
     puts("Second task\n");
@@ -264,19 +268,19 @@ void first_task(int* control_array, int* array, size_t length)
 size_t new_length(int* array, size_t length, size_t const k)
 {
     size_t new_leng = length;
-    if (array[length-1] % 10 == k)
+    if (abs(array[length-1]) % 10 == k)
     {
         new_leng++;
     }
     
-    else if (array[0] % 10 == k)
+    if (abs(array[0]) % 10 == k)
     {
         new_leng++;
     }
     
     for (size_t i = 0; i < length - 1; i++)
     {
-        if ((array[i] % 10 == k && array[i+1] % 10 != k) || (array[i] % 10 != k && array[i+1] % 10 == k))
+        if ((abs(array[i]) % 10 == k && abs(array[i+1]) % 10 != k) || (abs(array[i]) % 10 != k && abs(array[i+1]) % 10 == k))
         {
             new_leng++;
         }
@@ -289,7 +293,7 @@ size_t new_length(int* array, size_t length, size_t const k)
 void second_task(int* original_array, int* array, size_t length, int number)
 {
     size_t top = 0;
-    if (original_array[0] % 10 == number)
+    if (abs(original_array[0]) % 10 == number)
     {
         array[top] = number;
         top++;
@@ -299,7 +303,7 @@ void second_task(int* original_array, int* array, size_t length, int number)
 
     for (size_t i = 1; i < length; i++)
     {
-        if ((original_array[i-1] % 10 == number && original_array[i] % 10 != number) || (original_array[i-1] % 10 != number && original_array[i] % 10 == number))
+        if ((abs(original_array[i-1]) % 10 == number && abs(original_array[i]) % 10 != number) || (abs(original_array[i-1]) % 10 != number && abs(original_array[i]) % 10 == number))
         {
             array[top] = number;
             top++;
@@ -308,7 +312,7 @@ void second_task(int* original_array, int* array, size_t length, int number)
         top++;
     }
 
-    if (original_array[length - 1] % 10 == number)
+    if (abs(original_array[length - 1]) % 10 == number)
     {
         array[top] = number;
         top++;
@@ -319,13 +323,13 @@ void third_task(int* control_array, int* array, size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
-        if (!is_even(control_array[i]))
+        if (!is_even(i))
         {
-            array[i] = (int)i * (control_array[i] * control_array[i]);
+            array[i] = i * pow(control_array[i], 2);
         }
         else
         {
-            array[i] = control_array[i] / ((int)i - 1);
+            array[i] = control_array[i] / (i - 1);
         }
     }
 }
@@ -338,4 +342,5 @@ void free_array(int* array)
         array = NULL;
     }
 }
+
 
