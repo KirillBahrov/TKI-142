@@ -110,6 +110,8 @@ int* second_task_1(int* array, size_t length, size_t k);
 */
 int main()
 {
+    const int min_range = -15;
+    const int max_range = 15;
     puts("insert a length of array\n");
     size_t length = get_size_t();
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
@@ -207,11 +209,11 @@ void user_array(int* const array, const size_t length)
     }
 }
 
-void random_array(int* const array, const size_t length)
+void random_array(int* const array, const size_t length, const int max, const int min)
 {
     for (size_t i = 0; i < length; i++)
     {
-        array[i] = rand() % 15 - 15;
+        array[i] = rand() % max + min;
     }
 }
 
