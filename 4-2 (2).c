@@ -69,7 +69,7 @@ void show_array(const int* const array, const size_t length);
  * @param length размер массива
  * @return new_array новый массив, соответствующий этим требованиям
 */
-void first_task(int* control_array, int* array, size_t length);
+void first_task(int* control_array, const int* array, size_t length);
 
 /**
  * @brief ЗАПОЛНЯЕТ массив по условию пункта 2
@@ -251,7 +251,7 @@ bool is_even(int number)
     return number % 2 == 0;
 }
 
-void first_task(int* control_array, int* array, size_t length)
+void first_task(int* control_array, const int* array, size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
