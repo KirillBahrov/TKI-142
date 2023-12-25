@@ -78,7 +78,7 @@ void first_task(int* control_array, const int* array, size_t length);
  * @param length длина исходного массива
  * @param number введенное число
 */
-void second_task(int* original_array, int* array, size_t length, int number);
+void second_task(int* original_array, const int* array, size_t length, int number);
 
 /**
  * @brief Функция проверяет на четность целое число
@@ -94,7 +94,7 @@ bool is_even(int number);
  * @param length размерность массива
  * @return new_array новый массив, соответствующий этим требованиям
 */
-void third_task(int* control_array, int* array, size_t length);
+void third_task(int* control_array, const int* array, size_t length);
 
 /**
  * @brief Функция, освобождающая массив
@@ -102,7 +102,7 @@ void third_task(int* control_array, int* array, size_t length);
 */
 void free_array(int** array);
 
-int* second_task_1(int* array, size_t length, size_t k);
+int* second_task_1(const int* array, size_t length, size_t k);
 
 /**
  * @brief Точка входа в программу
@@ -291,7 +291,7 @@ size_t new_length(int* array, size_t length, size_t const k)
 }
 
 
-void second_task(int* original_array, int* array, size_t length, int number)
+void second_task(int* original_array, const int* array, size_t length, int number)
 {
     size_t top = 0;
     if (abs(original_array[0]) % 10 == number)
@@ -320,7 +320,7 @@ void second_task(int* original_array, int* array, size_t length, int number)
     }
 }
 
-void third_task(int* control_array, int* array, size_t length)
+void third_task(int* control_array, const int* array, size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
