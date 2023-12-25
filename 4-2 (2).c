@@ -32,7 +32,7 @@ enum Choices
  * @param length длина массива
  * @return array указатель на пустой массив
 */
-int* get_mem_array(const size_t length);
+int* get_array(const size_t length);
 
 /**
  * @brief фукнция считает новую длину под масиив из пункта 2
@@ -116,7 +116,7 @@ int main()
     size_t length = get_size_t();
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
     int choice = get_int();
-    int* mas = get_mem_array(length);
+    int* mas =  get_array(length);
 
     switch ((enum Choices)choice)
     {
@@ -134,7 +134,7 @@ int main()
     puts("Array\n");
     show_array(mas, length);
 
-    int* task_1_array = get_mem_array(length);
+    int* task_1_array =  get_array(length);
     first_task(mas, task_1_array, length);
     puts("First task\n");
     show_array(task_1_array, length);
@@ -148,13 +148,13 @@ int main()
         return 1;
     }
     
-    int* task_2_1 = get_mem_array(new_length(mas, length, k));
+    int* task_2_1 =  get_array(new_length(mas, length, k));
     second_task(mas, task_2_1, length, k);
     puts("Second task\n");
     show_array(task_2_1, new_length(mas, length, k));
     free_array(&task_2_1);
 
-    int* task_3_array = get_mem_array(length);
+    int* task_3_array =  get_array(length);
     third_task(mas, task_3_array, length);
     puts("Third task\n");
     show_array(task_3_array, length);
