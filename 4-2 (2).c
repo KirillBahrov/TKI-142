@@ -101,7 +101,7 @@ void third_task(int* control_array, int* array, size_t length);
  * @brief Функция, освобождающая массив
  * @param array указатель на массив
 */
-void free_array(int* array);
+void free_array(int** array);
 
 int* second_task_1(int* array, size_t length, size_t k);
 
@@ -137,7 +137,7 @@ int main()
     first_task(mas, task_1_array, length);
     puts("First task\n");
     show_array(task_1_array, length);
-    free_array(task_1_array);
+    free_array(&task_1_array);
 
     puts("Insert a K\n");
     int k = get_int();
@@ -151,14 +151,14 @@ int main()
     second_task(mas, task_2_1, length, k);
     puts("Second task\n");
     show_array(task_2_1, new_length(mas, length, k));
-    free_array(task_2_1);
+    free_array(&task_2_1);
 
     int* task_3_array = get_mem_array(length);
     third_task(mas, task_3_array, length);
     puts("Third task\n");
     show_array(task_3_array, length);
-    free_array(task_3_array);
-    free_array(mas);
+    free_array(&task_3_array);
+    free_array(&mas);
 
     return 0;
 }
@@ -334,7 +334,7 @@ void third_task(int* control_array, int* array, size_t length)
     }
 }
 
-void free_array(int* array)
+void free_array(int** array)
 {
     if (array != NULL)
     {
@@ -342,5 +342,3 @@ void free_array(int* array)
         array = NULL;
     }
 }
-
-
