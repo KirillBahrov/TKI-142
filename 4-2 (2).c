@@ -61,7 +61,7 @@ void user_array(int* const array, const size_t length);
  * @param array указатель на заполняемый массив
  * @param length длина массива
 */
-void random_array(int* const array, const size_t length, const max_range, const min_range);
+void random_array(int* const array, const size_t length, const int max_range, const int min_range);
 
 /**
  * @brief Функция, показывающая массив поэлементно
@@ -76,7 +76,7 @@ void show_array(const int* const array, const size_t length);
  * @param length размер массива
  * @return new_array новый массив, соответствующий этим требованиям
 */
-void first_task(int* control_array, const int* array, size_t length);
+void first_task( int* control_array, int* array, size_t length);
 
 /**
  * @brief ЗАПОЛНЯЕТ массив по условию пункта 2
@@ -85,7 +85,7 @@ void first_task(int* control_array, const int* array, size_t length);
  * @param length длина исходного массива
  * @param number введенное число
 */
-void second_task(int* original_array, const int* array, size_t length, int number);
+void second_task(const int* original_array, int* array, size_t length, int number);
 
 /**
  * @brief Функция проверяет на четность целое число
@@ -101,7 +101,7 @@ bool is_even(int number);
  * @param length размерность массива
  * @return new_array новый массив, соответствующий этим требованиям
 */
-void third_task(int* control_array, const int* array, size_t length);
+void third_task(const int* control_array, int* array, size_t length);
 
 /**
  * @brief Функция, освобождающая массив
@@ -270,7 +270,7 @@ bool is_even(int number)
     return number % 2 == 0;
 }
 
-void first_task(const int* control_array, int* array, size_t length)
+void first_task( int* control_array, int* array, size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
@@ -290,7 +290,7 @@ size_t new_length(int* array, size_t length, size_t const k)
     size_t new_leng = length;
     for (size_t i = 0; i < length; i++)
     {    
-        if (abs(array[i]) % 10 == number)
+        if (abs(array[i]) % 10 == k)
         {
             new_leng++;
         }
