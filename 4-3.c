@@ -356,7 +356,7 @@ int **second_task(int** const array, size_t rows, size_t cols)
         {
             if (!contains(trash_columns, (cols - new_columns), i))
             {
-                new_array[row_top][col_top] = array[j][i];
+                new_array[i][col_top] = array[j][i];
                 row_top++;
                 flag = 1;
             }
