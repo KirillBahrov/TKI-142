@@ -102,8 +102,6 @@ void third_task(int* control_array, const int* array, size_t length);
 */
 void free_array(int** array);
 
-int* second_task_1(const int* array, size_t length, size_t k);
-
 /**
  * @brief Точка входа в программу
  * @return 0 Программа исправна
