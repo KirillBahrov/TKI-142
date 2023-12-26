@@ -318,7 +318,7 @@ void fill_trash_columns(const int** const array, int* array_linear, size_t rows,
     size_t top = 0;
     for (size_t i = 0; i < cols; i++)
     {
-        if (array[0][i] > array[-1][i])
+        if (array[0][i] > array[rows-1][i])
         {
             array_linear[top] = i;
             top++;
