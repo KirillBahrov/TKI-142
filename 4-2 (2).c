@@ -131,6 +131,7 @@ int main()
     default:
         puts("Insert a valid choice!\n");
         return 1;
+        break;
     }
     
     puts("Array\n");
