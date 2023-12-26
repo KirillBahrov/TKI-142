@@ -254,7 +254,7 @@ bool is_even(int number)
     return number % 2 == 0;
 }
 
-void first_task(int* control_array, const int* array, size_t length)
+void first_task(const int* control_array, int* array, size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
@@ -323,7 +323,7 @@ void second_task(int* original_array, const int* array, size_t length, int numbe
     }
 }
 
-void third_task(int* control_array, const int* array, size_t length)
+void third_task(const int* control_array, int* array, size_t length)
 {
     for (size_t i = 0; i < length; i++)
     {
