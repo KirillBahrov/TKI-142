@@ -271,31 +271,30 @@ void first_task(const int* control_array, int* array, size_t length)
 
 size_t new_length(int* array, size_t length, size_t const k)
 {
-size_t new_leng = length;
-for (size_t i = 0; i < length; i++)
-{
-if (abs(array[i]) % 10 == number)
-{
-new_leng++;
-}
-}
-
-return new_leng;
+    size_t new_leng = length;
+    for (size_t i = 0; i < length; i++)
+    {    
+        if (abs(array[i]) % 10 == number)
+        {
+            new_leng++;
+        }
+    }
+    return new_leng;
 }
 
 void second_task(const int* original_array, int* array, size_t length, int number)
 {
-size_t top = 0;
-for (size_t i = 0; i < length; i++)
-{
-if (abs(original_array[i]) % 10 == number)
-{
-array[top] = number;
-top++;
-}
-array[top] = original_array[i];
-top++;
-}
+    size_t top = 0;
+    for (size_t i = 0; i < length; i++)
+    {
+        if (abs(original_array[i]) % 10 == number)
+        {
+            array[top] = number;
+            top++;
+        }
+        array[top] = original_array[i];
+        top++;
+    }
 }
 
 void third_task(const int* control_array, int* array, size_t length)
