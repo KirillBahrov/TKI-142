@@ -9,6 +9,13 @@
  * @return целочисленная цифра
 */
 int get_int();
+/**
+ * @brief Функция определяет выполняется ли условие максимальное больше минимального
+ * @param min_range - значение минимального диапозона, вводимого пользователем
+ * @param max_range - значение максимального диапозона, вводимого пользователем
+ * @return true, если условие выполняется, иначе объясняет что Введенные значения не удовлетворяют условию
+*/
+int is_equal(int min_range, int max_range);
 
 /**
  * @brief Функция присваивает переменной целочисленное значение и проверяет его на положителность
@@ -112,6 +119,7 @@ int main()
     const int min_range = get_int();
     puts("Enter the max_range: ");
     const int max_range = get_int();
+    is_equal(min_range, max_range);
     puts("insert a length of array\n");
     size_t length = get_size_t();
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
@@ -174,6 +182,16 @@ int get_int()
         abort();
     }
     return number;
+}
+
+int is_equal(int min_range, int max_range)
+{
+    if(max_range > min_range){
+        return true;
+    }
+    else{
+        puts("\nThe entered values do not meet the condition");
+    }
 }
 
 size_t get_size_t()
