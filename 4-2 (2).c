@@ -271,26 +271,16 @@ void first_task(const int* control_array, int* array, size_t length)
 
 size_t new_length(int* array, size_t length, size_t const k)
 {
-    size_t new_leng = length;
-    if (abs(array[length-1]) % 10 == k)
-    {
-        new_leng++;
-    }
-    
-    if (abs(array[0]) % 10 == k)
-    {
-        new_leng++;
-    }
-    
-    for (size_t i = 0; i < length - 1; i++)
-    {
-        if ((abs(array[i]) % 10 == k && abs(array[i+1]) % 10 != k) || (abs(array[i]) % 10 != k && abs(array[i+1]) % 10 == k))
-        {
-            new_leng++;
-        }
-    }
+size_t new_leng = length;
+for (size_t i = 0; i < length; i++)
+{
+if (abs(array[i]) % 10 == number)
+{
+new_leng++;
+}
+}
 
-    return new_leng;
+return new_leng;
 }
 
 
