@@ -283,34 +283,19 @@ new_leng++;
 return new_leng;
 }
 
-
-void second_task(int* original_array, const int* array, size_t length, int number)
+void second_task(const int* original_array, int* array, size_t length, int number)
 {
-    size_t top = 0;
-    if (abs(original_array[0]) % 10 == number)
-    {
-        array[top] = number;
-        top++;
-    }
-    array[top] = original_array[0];
-    top++;
-
-    for (size_t i = 1; i < length; i++)
-    {
-        if ((abs(original_array[i-1]) % 10 == number && abs(original_array[i]) % 10 != number) || (abs(original_array[i-1]) % 10 != number && abs(original_array[i]) % 10 == number))
-        {
-            array[top] = number;
-            top++;
-        }
-        array[top] = original_array[i];
-        top++;
-    }
-
-    if (abs(original_array[length - 1]) % 10 == number)
-    {
-        array[top] = number;
-        top++;
-    }
+size_t top = 0;
+for (size_t i = 0; i < length; i++)
+{
+if (abs(original_array[i]) % 10 == number)
+{
+array[top] = number;
+top++;
+}
+array[top] = original_array[i];
+top++;
+}
 }
 
 void third_task(const int* control_array, int* array, size_t length)
