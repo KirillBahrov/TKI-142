@@ -295,7 +295,7 @@ size_t new_cols(const int** const array, size_t rows, size_t cols)
     size_t new_columns = cols;
     for (size_t i = 0; i < cols; i++)
     {
-        if (array[0][i] > array[-1][i])
+        if (array[rows-1][i] > array[-1][i])
         {
             new_columns--;
         }
