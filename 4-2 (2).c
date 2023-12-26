@@ -238,7 +238,7 @@ void copy_array(int* const array_original, int* array_copy, const size_t length)
 
 int find_abs_max(int* const array, size_t length)
 {
-    int abs_max = 0;
+    int abs_max = abs(array[0]);
     for (size_t i = 0; i < length; i++)
     {
         if (abs(array[i]) > abs(array[abs_max]))
