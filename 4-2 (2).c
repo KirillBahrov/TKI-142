@@ -108,12 +108,10 @@ void free_array(int** array);
 */
 int main()
 {
-    int min_range = 0, max_range = 0;
-    puts("Enter the min_range: );
-    get_int(min_range);
-    get_int(max_range);
-    const int min_range = -15;
-    const int max_range = 15;
+    puts("Enter the min_range: ");
+    const int min_range = get_int();
+    puts("Enter the max_range: ");
+    const int max_range = get_int();
     puts("insert a length of array\n");
     size_t length = get_size_t();
     puts("if you fill array by youself, press 1, if you fill array by random numbers, press 2\n");
