@@ -61,7 +61,7 @@ void user_array(int* const array, const size_t length);
  * @param array указатель на заполняемый массив
  * @param length длина массива
 */
-void random_array(int* const array, const size_t length);
+void random_array(int* const array, const size_t length, const max_range, const min_range);
 
 /**
  * @brief Функция, показывающая массив поэлементно
@@ -129,7 +129,7 @@ int main()
     switch ((enum Choices)choice)
     {
     case random_choice:
-        random_array(mas, length);
+        random_array(mas, length, min_range, max_range);
         break;
     case user_choice:
         user_array(mas, length);
@@ -228,11 +228,11 @@ void user_array(int* const array, const size_t length)
     }
 }
 
-void random_array(int* const array, const size_t length, const int max, const int min)
+void random_array(int* const array, const size_t length, const int max_range, const int min_range)
 {
     for (size_t i = 0; i < length; i++)
     {
-        array[i] = rand() % max + min;
+        array[i] = rand() % max_range + min_range;
     }
 }
 
