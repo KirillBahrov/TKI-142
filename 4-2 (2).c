@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <stdbool.h>
 
+
 /**
 * @brief Функция присваивает целочисленное значение переменной
 * @return число
@@ -119,7 +120,7 @@ puts("Enter the min_range: ");
 const int min_range = get_int();
 puts("Enter the max_range: ");
 const int max_range = get_int();
-is_equal(min_range, max_range);
+is_equal_range(min_range, max_range);
 puts("insert a length of array\n");
 size_t length = get_size_t();
 printf("if you fill array by youself, press %d, if you fill array by random numbers, press %d\n", (enum Choices)(user_array), (enum Choices)(random_array));
@@ -128,17 +129,16 @@ int* mas = get_array(length);
 
 switch ((enum Choices)choice)
 {
-case random_choice:
-random_array(mas, length, min_range, max_range);
-break;
-case
-user_choice:
-user_array(mas, length);
-break;
-default:
-puts("Insert a valid choice!\n");
-return 1;
-break;
+  case random_choice:
+    random_array(mas, length, min_range, max_range);
+    break;
+  case user_choice:
+    user_array(mas, length);
+    break;
+  default:
+    puts("Insert a valid choice!\n");
+    return 1;
+    break;
 }
 
 puts("Array\n");
@@ -176,162 +176,162 @@ return 0;
 
 int get_int()
 {
-int number;
-if (scanf("%d", &number) != 1)
-{
-puts("Inserted a wrong value\n");
-abort();
-}
-return number;
+  int number;
+  if (scanf("%d", &number) != 1)
+  {
+    puts("Inserted a wrong value\n");
+    abort();
+  }
+  return number;
 }
 
-bool is_equal(int min_range, int max_range)
+bool is_equal_range(int min_range, int max_range)
 {
-if(max_range > min_range){
-return true;
-}
-abort();
+  if(max_range > min_range)
+  {
+    return true;
+  }
+  abort();
 }
 
 size_t get_size_t()
 {
-int number = get_int();
-if (number <= 0)
-{
-errno = ERANGE;
-perror("Error: \n");
-abort();
-}
-return (size_t)number;
+  int number = get_int();
+  if (number <= 0)
+  {
+    errno = ERANGE;
+    perror("Error: \n");
+    abort();
+  }
+  return (size_t)number;
 }
 
 int* get_mem_array(const size_t length)
 {
-int* array = (int*)malloc(length * sizeof(int));
-if (NULL == array)
-{
-errno = ENOMEM;
-perror("Error: ");
-abort();
-}
-return array;
+  int* array = (int*)malloc(length * sizeof(int));
+  if (NULL == array)
+  {
+    errno = ENOMEM;
+    perror("Error: ");
+    abort();
+  }
+  return array;
 }
 
 void user_array(int* const array, const size_t length)
 {
-puts("Insert array elements:\n");
-
-for (size_t i = 0; i < length; i++)
-{
-array[i] = get_int();
-}
+  puts("Insert array elements:\n");
+  for (size_t i = 0; i < length; i++)
+  {
+    array[i] = get_int();
+  }
 }
 
 void random_array(int* const array, const size_t length, const int max_range, const int min_range)
 {
-for (size_t i = 0; i < length; i++)
-{
-array[i] = rand() % max_range + min_range;
-}
+  for (size_t i = 0; i < length; i++)
+  {  
+    array[i] = rand() % max_range + min_range;
+  }
 }
 
 void show_array(const int* const array, const size_t length)
 {
-for (size_t i = 0; i < length; i++)
-{
-printf("Element[%ld] %d\n", i, array[i]);
-}
+  for (size_t i = 0; i < length; i++)
+  {
+    printf("Element[%ld] %d\n", i, array[i]);
+  }
 }
 
 void copy_array(int* const array_original, int* array_copy, const size_t length)
 {
-for (size_t i = 0; i < length; i++)
-{
-array_copy[i] = array_original[i];
-}
+  for (size_t i = 0; i < length; i++)
+  {
+    array_copy[i] = array_original[i];
+  }
 }
 
 int find_abs_max(int* const array, size_t length)
 {
-int abs_max = abs(array[0]);
-for (size_t i = 0; i < length; i++)
-{
-if (abs(array[i]) > abs(array[abs_max]))
-{
-abs_max = i;
-}
-}
-return abs_max;
+  int abs_max = abs(array[0]);
+  for (size_t i = 0; i < length; i++)
+  {
+    if (abs(array[i]) > abs(array[abs_max]))
+    {
+      abs_max = i;
+    }
+  }
+  return abs_max;
 }
 
 bool is_even(int number)
 {
-return number % 2 == 0;
+  return number % 2 == 0;
 }
 
 void first_task( int* control_array, int* array, size_t length)
 {
-for (size_t i = 0; i < length; i++)
-{
-if (i == length - 2)
-{
-array[i] = control_array[find_abs_max(control_array, length)];
-}
-else
-{
-array[i] = control_array[i];
-}
-}
+  for (size_t i = 0; i < length; i++)
+  {
+    if (i == length - 2)
+    {
+      array[i] = control_array[find_abs_max(control_array, length)];
+    }
+    else
+    {
+      array[i] = control_array[i];
+    }
+  }
 }
 
 size_t new_length(const int* array, size_t length, size_t const k)
 {
-size_t new_leng = length;
-for (size_t i = 0; i < length; i++)
-{
-if (abs(array[i]) % 10 == k)
-{
-new_leng++;
-}
-}
-return new_leng;
+  size_t new_leng = length;
+  for (size_t i = 0; i < length; i++)
+  {
+    if (abs(array[i]) % 10 == k)
+    {
+      new_leng++;
+    }
+  }
+  return new_leng;
 }
 
 void second_task(const int* original_array, int* array, size_t length, int number)
 {
-size_t top = 0;
-for (size_t i = 0; i < length; i++)
-{
-if (abs(original_array[i]) % 10 == number)
-{
-array[top] = number;
-top++;
-}
-array[top] = original_array[i];
-top++;
-}
+  size_t top = 0;
+  for (size_t i = 0; i < length; i++)
+  {
+    if (abs(original_array[i]) % 10 == number)
+    {
+      array[top] = number;
+      top++;
+    }
+  array[top] = original_array[i];
+  top++;
+  }
 }
 
 void third_task(const int* control_array, int* array, size_t length)
 {
-for (size_t i = 0; i < length; i++)
-{
-if (!is_even(i))
-{
-array[i] = i * control_array[i] * control_array[i];
-}
-else
-{
-array[i] = control_array[i] / (i - 1);
-}
-}
+  for (size_t i = 0; i < length; i++)
+  {
+    if (!is_even(i))
+    {
+      array[i] = i * control_array[i] * control_array[i];
+    }
+    else
+    {
+      array[i] = control_array[i] / (i - 1);
+    }
+  }
 }
 
 void free_array(int** array)
 {
-if (array != NULL)
-{
-free(array);
-array = NULL;
-}
+  if (array != NULL)
+  {
+    free(array);
+    array = NULL;
+  }
 }
