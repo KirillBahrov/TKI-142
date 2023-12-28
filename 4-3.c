@@ -19,7 +19,7 @@ void array_null();
  * @param array указатель на заполняемый массив
  * @param rows количество строк в массиве
 */
-void free_array(int** array, size_t rows);
+void free_array(int*** array, size_t rows);
 
 /**
  * @brief Функция присваивает переменной целочисленное значение и проверяет его на положителность
@@ -369,18 +369,17 @@ int **second_task(int** const array, size_t rows, size_t cols)
     return new_array;
 }
 
-void free_array(int** array, size_t rows)
+void free_array(int*** array, size_t rows)
 {
     for (size_t i = 0; i < rows; i++)
     {
-        if (NULL != array[i])
-        {
-            free(array[i]);
-        }
+        free(&array[i]);
+        &array[i] = NULL;
     }
     if (NULL != array)
     {
-        free(array);
+        free(&array);
+        &array = NULL;
     }
 }
 
