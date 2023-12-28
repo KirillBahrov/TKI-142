@@ -171,9 +171,9 @@ int main()
         size_t new_columns = new_cols(mas, n, m);
         show_array(second_array, n, new_columns);
     }
-    free_array(mas, n);
-    free_array(first_array, n);
-    free_array(second_array, n);
+    free_array(&mas, n);
+    free_array(&first_array, n);
+    free_array(&second_array, n);
     return 0;
 }
 
