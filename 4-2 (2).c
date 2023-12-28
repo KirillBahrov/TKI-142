@@ -329,9 +329,6 @@ void third_task(const int* control_array, int* array, size_t length)
 
 void free_array(int** array)
 {
-  if (array != NULL)
-  {
     free(array);
     array = NULL;
-  }
 }
